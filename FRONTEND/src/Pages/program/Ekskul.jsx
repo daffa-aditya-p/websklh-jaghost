@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from "../../components/ScrollReveal";
 import {
   IoSearch,
   IoClose,
@@ -333,8 +334,8 @@ const Ekskul = () => {
     <div className="w-full bg-[#eef4fd] text-slate-800 relative">
       {/* ─── HERO SECTION (SESUAI DOKUMEN DESAIN 1:1) ─── */}
       <section
-        className="w-full relative h-screen flex items-center overflow-hidden 
-        bg-linear-to-b  from-[#D8E2FF] to-[#F8FAFC]
+        className="w-full relative min-h-[85vh] lg:h-screen flex items-center overflow-hidden 
+        bg-linear-to-b from-[#D8E2FF] to-[#F8FAFC]
         pt-28 pb-16 lg:pt-36 lg:pb-24"
       >
         <div
@@ -346,8 +347,6 @@ const Ekskul = () => {
           }}
           className="absolute top-0 left-0 w-full h-full z-0"
         ></div>
-        {/* Shape Organik Abu-abu Lembut di Sisi Kiri Bawah */}
-        <div className="absolute bottom-0 left-0 h-100 rounded-tr-full z-0 bg-[#D9D9D9] w-1/5"></div>
 
         {/* Kontainer Utama Hero */}
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full relative z-10">
@@ -356,7 +355,7 @@ const Ekskul = () => {
             <div className="lg:col-span-5 flex justify-center lg:justify-end items-center select-none pointer-events-none pr-0 lg:pr-6"></div>
 
             {/* Kolom Kanan: Teks Konten Ekstrakurikuler */}
-            <div className="lg:col-span-7 flex flex-col justify-center items-start pl-0 lg:pl-6 max-w-2xl">
+            <ScrollReveal direction="up" duration={0.55} className="lg:col-span-7 flex flex-col justify-center items-start pl-0 lg:pl-6 max-w-2xl">
               {/* Breadcrumb: Program > Ekstrakurikuler */}
               <nav
                 aria-label="Breadcrumb"
@@ -379,7 +378,7 @@ const Ekskul = () => {
               {/* Paragraf Deskripsi */}
               <p
                 className="text-slate-800 text-sm sm:text-base lg:text-[16px] leading-relaxed 
-              font-normal mb-8 text-left pr-24"
+              font-normal mb-8 text-left pr-0 sm:pr-8 lg:pr-24"
               >
                 SMK Negeri 26 Jakarta menyediakan wadah yang besar untuk
                 menampung minat dan bakat siswa-siswi yang sangat beragam. Selain
@@ -398,7 +397,7 @@ const Ekskul = () => {
                   &gt;
                 </span>
               </button>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -410,41 +409,41 @@ const Ekskul = () => {
       >
         <div className="max-w-7xl mx-auto">
           {/* Judul Utama */}
-          <div className="title text-center mb-10 sm:mb-12">
-            <h1 className="text-5xl sm:text-7xl lg:text-[88px] font-montserrat font-black text-white tracking-wider leading-[1.1]">
+          <ScrollReveal direction="up" duration={0.5} className="title text-center mb-8 sm:mb-12">
+            <h1 className="text-3xl sm:text-6xl lg:text-[88px] font-montserrat font-black text-white tracking-wider leading-[1.1]">
               EKSTRAKURIKULER
             </h1>
-          </div>
+          </ScrollReveal>
 
           {/* Bar Kontrol: Search Bar & Filter Switch INDOOR / OUTDOOR */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-5 mb-10 sm:mb-12">
+          <ScrollReveal direction="up" delay={0.06} duration={0.5} className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-5 mb-8 sm:mb-12">
             {/* Search Input Bar */}
-            <div className="bg-white rounded-full flex items-center px-6 py-3.5 sm:py-4 shadow-sm w-full md:flex-1 md:max-w-2xl">
-              <IoSearch className="t text-2xl sm:text-3xl shrink-0" />
-              <div className="w-[1.5px] h-6 sm:h-7 bg-slate-300 mx-3 sm:mx-4 shrink-0" />
+            <div className="bg-white rounded-full flex items-center px-5 sm:px-6 py-3 sm:py-4 shadow-sm w-full md:flex-1 md:max-w-2xl">
+              <IoSearch className="text-xl sm:text-3xl shrink-0 text-slate-500" />
+              <div className="w-[1.5px] h-5 sm:h-7 bg-slate-300 mx-3 sm:mx-4 shrink-0" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari ekstrakurikuler..."
-                className="w-full bg-transparent text-slate-800 placeholder:text-slate-400 font-medium text-base sm:text-lg outline-none border-none"
+                className="w-full bg-transparent text-slate-800 placeholder:text-slate-400 font-medium text-sm sm:text-lg outline-none border-none"
               />
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="shrink-0 t hover:opacity-80 transition-opacity cursor-pointer flex items-center justify-center ml-2"
+                className="shrink-0 text-slate-400 hover:text-slate-600 transition-opacity cursor-pointer flex items-center justify-center ml-2"
                 aria-label="Hapus pencarian"
               >
-                <IoClose className="text-2xl sm:text-3xl" />
+                <IoClose className="text-xl sm:text-3xl" />
               </button>
             </div>
 
             {/* Toggle INDOOR / OUTDOOR */}
-            <div className="bg-white/20 backdrop-blur-xs p-1.5 rounded-full flex items-center shrink-0 border border-white/10">
+            <div className="bg-white/20 backdrop-blur-xs p-1.5 rounded-full flex items-center shrink-0 border border-white/10 w-full sm:w-auto justify-center">
               <button
                 type="button"
                 onClick={() => setFilterType("INDOOR")}
-                className={`rounded-full px-7 sm:px-9 py-2.5 sm:py-3 text-sm sm:text-base font-extrabold tracking-wider transition-all duration-200 cursor-pointer ${
+                className={`rounded-full px-5 sm:px-9 py-2 sm:py-3 text-xs sm:text-base font-extrabold tracking-wider transition-all duration-200 cursor-pointer flex-1 sm:flex-initial text-center ${
                   filterType === "INDOOR"
                     ? "bg-secondary text-white shadow-sm"
                     : "bg-transparent text-white hover:text-white/80"
@@ -455,7 +454,7 @@ const Ekskul = () => {
               <button
                 type="button"
                 onClick={() => setFilterType("OUTDOOR")}
-                className={`rounded-full px-7 sm:px-9 py-2.5 sm:py-3 text-sm sm:text-base font-extrabold tracking-wider transition-all duration-200 cursor-pointer ${
+                className={`rounded-full px-5 sm:px-9 py-2 sm:py-3 text-xs sm:text-base font-extrabold tracking-wider transition-all duration-200 cursor-pointer flex-1 sm:flex-initial text-center ${
                   filterType === "OUTDOOR"
                     ? "bg-secondary text-white shadow-sm"
                     : "bg-transparent text-white hover:text-white/80"
@@ -464,12 +463,12 @@ const Ekskul = () => {
                 OUTDOOR
               </button>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Grid Kartu Ekstrakurikuler (3 Kolom x 2 Baris = 6 Kartu) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <ScrollStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" staggerDelay={0.06}>
             {filteredEkskul.map((item) => (
-              <div
+              <ScrollStaggerItem
                 key={item.id}
                 className="bg-white rounded-4xl sm:rounded-4xl overflow-hidden flex flex-col shadow-lg shadow-black/5"
               >
@@ -499,9 +498,9 @@ const Ekskul = () => {
                     <span className="text-sm font-bold">&gt;</span>
                   </button>
                 </div>
-              </div>
+              </ScrollStaggerItem>
             ))}
-          </div>
+          </ScrollStagger>
         </div>
       </section>
     </div>

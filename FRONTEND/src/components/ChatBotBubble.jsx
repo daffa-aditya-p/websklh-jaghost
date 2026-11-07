@@ -249,7 +249,7 @@ const BUBBLE_HOVERED = "p-3 rotate-0";
 const BUBBLE_DEFAULT = "p-2 rotate-360";
 
 const PANEL_BASE =
-  "container pr-8 overflow-hidden pl-4 py-3 flex gap-4 flex-row bg-secondary/30 backdrop-blur-xs rounded-l-full -mr-5 shadow-lg transition-all duration-300 ease-in-out items-center";
+  "pr-7 sm:pr-8 overflow-hidden pl-3 sm:pl-4 py-2.5 sm:py-3 flex gap-2 sm:gap-4 flex-row bg-secondary/30 backdrop-blur-md rounded-l-full -mr-5 shadow-lg transition-all duration-300 ease-in-out items-center max-w-[calc(100vw-5rem)]";
 
 const INITIAL_MESSAGES = [
   { id: 1, text: "Halo! Ada yang bisa saya bantu?", isUser: false },
@@ -321,10 +321,15 @@ const ChatBotBubble = () => {
 
   const handleMouseEnter = useCallback(() => setIsHovered(true), []);
   const handleMouseLeave = useCallback(() => setIsHovered(false), []);
-  const handleToggleActive = useCallback(
-    () => setIsActive((prev) => !prev),
-    [],
-  );
+  const handleToggleActive = useCallback(() => {
+    setIsActive((prev) => {
+      const next = !prev;
+      if (next) {
+        setIsHovered(true);
+      }
+      return next;
+    });
+  }, []);
 
   // Inject styles for editorial spotlight and cursor click ripple
   useEffect(() => {
@@ -961,7 +966,7 @@ const ChatBotBubble = () => {
     [handleSend],
   );
 
-  const STYLE_CONTAINER = "fixed bottom-24 right-10 flex flex-col rounded-lg bg-secondary/30 shadow-lg backdrop-blur-xs w-78 h-90 overflow-hidden transition-all duration-300 ease-in-out";
+  const STYLE_CONTAINER = "fixed bottom-20 sm:bottom-24 right-4 sm:right-7 lg:right-10 flex flex-col rounded-2xl bg-secondary/30 shadow-2xl backdrop-blur-md w-[calc(100vw-2rem)] sm:w-80 max-w-sm h-[70vh] sm:h-96 max-h-[460px] overflow-hidden transition-all duration-300 ease-in-out border border-white/20";
 
   return (
     <div onMouseLeave={isActive ? handleMouseLeave : undefined}>
@@ -1019,8 +1024,46 @@ const ChatBotBubble = () => {
 
       {/* Chat container */}
       <div
-        className={`${STYLE_CONTAINER} ${isHovered && isActive ? "opacity-100 z-50" : "opacity-0 -z-10"} `}
+        className={`${STYLE_CONTAINER} ${isHovered && isActive ? "opacity-100 z-50 pointer-events-auto" : "opacity-0 -z-10 pointer-events-none"} `}
       >
+        {/* Header Chat / Top Bar with Mobile Close Button (X) */}
+        <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#03172E]/80 backdrop-blur-md border-b border-white/10 shrink-0">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-xs font-semibold text-white tracking-wide">
+              TechnoBot AI SMKN 26
+            </span>
+          </div>
+
+          {/* Tombol X untuk menutup (sangat jelas untuk pengguna HP) */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsActive(false);
+              setIsHovered(false);
+            }}
+            aria-label="Tutup chatbot"
+            className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 text-white transition-all cursor-pointer"
+          >
+            <svg
+              className="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
         <div
           className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3"
           onWheel={(e) => e.stopPropagation()}
@@ -1041,7 +1084,7 @@ const ChatBotBubble = () => {
       </div>
 
       {/* Floating button + hover panel */}
-      <div className="fixed bottom-7 right-7 z-50 flex flex-row-reverse items-center">
+      <div className="fixed bottom-4 right-4 sm:bottom-7 sm:right-7 z-50 flex flex-row-reverse items-center max-w-[calc(100vw-2rem)]">
         <button
           type="button"
           aria-label={isActive ? "Tutup chat" : "Buka chat"}
@@ -1053,10 +1096,14 @@ const ChatBotBubble = () => {
         </button>
 
         <div
-          className={`${PANEL_BASE} ${isHovered ? "opacity-100 w-70" : "opacity-0 w-0"}`}
+          className={`${PANEL_BASE} ${isHovered ? "opacity-100 w-56 sm:w-70" : "opacity-0 w-0"}`}
         >
           <svg
-            onClick={setIsHovered.bind(null, false)}
+            onClick={() => {
+              setIsHovered(false);
+              setIsActive(false);
+            }}
+            className="cursor-pointer shrink-0"
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"

@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useSpring, useInView } from "framer-motion";
+import { ScrollReveal } from "../../components/ScrollReveal";
 import foto1 from '../../assets/sejarah/1.avif';
 import foto2 from '../../assets/sejarah/2.jpg';
 import foto3 from '../../assets/sejarah/3.jpg';
@@ -152,9 +153,9 @@ const TimelineItem = ({ item }) => {
     <motion.div
       variants={slowVariants}
       initial="hidden"
-      // animate={isInView ? "visible" : "hidden"}
       whileInView="visible"
-      transition={{duration:1, delay:0.5, ease:'easeInOut'}}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
       style={{ width: TEXT_W, flexShrink: 0, boxSizing: "border-box" }}
     >
       <p
@@ -203,7 +204,8 @@ const TimelineItem = ({ item }) => {
       variants={fastVariants}
       initial="hidden"
       whileInView="visible"
-      transition={{duration:1, delay:0.5, ease:'easeInOut'}}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
       // animate={isInView ? "visible" : "hidden"}
       style={{ width: IMAGE_W, flexShrink: 0, boxSizing: "border-box" }}
     >
@@ -316,18 +318,7 @@ const Sejarah = () => {
       {/* ════════════════════════════════════════════
           HERO
       ════════════════════════════════════════════ */}
-      <section className='bg-linear-to-b from-side-back to-white'
-        style={{
-          width: "100%",
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "80px 10%",
-          position: "relative",
-          boxSizing: "border-box",
-        }}
-      >
+      <section className='bg-linear-to-b from-side-back to-white w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-[10%] pt-28 pb-16 relative box-border'>
 
         <div
           style={{
@@ -337,33 +328,35 @@ const Sejarah = () => {
           }}
           className="absolute inset-0 pointer-events-none"
         />
-        <h1
-          style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 900,
-            fontSize: "clamp(2.4rem, 5.5vw, 4.5rem)",
-            color: "#000",
-            lineHeight: 1.1,
-            margin: 0,
-          }}
-        >
-          MELANGKAH DARI <br />
-          <span style={{ color: "#0ea5e9" }}>MASA</span> KE{" "}
-          <span style={{ color: "#f97316" }}>MASA</span>
-        </h1>
-        <p
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "1.05rem",
-            color: "#4b5563",
-            maxWidth: "460px",
-            marginTop: "18px",
-            lineHeight: 1.75,
-          }}
-        >
-          Menelusuri perjalanan dan langkah SMK Negeri 26 Jakarta dalam
-          membangun pendidikan vokasi.
-        </p>
+        <ScrollReveal direction="up" duration={0.6}>
+          <h1
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 900,
+              fontSize: "clamp(2.4rem, 5.5vw, 4.5rem)",
+              color: "#000",
+              lineHeight: 1.1,
+              margin: 0,
+            }}
+          >
+            MELANGKAH DARI <br />
+            <span style={{ color: "#0ea5e9" }}>MASA</span> KE{" "}
+            <span style={{ color: "#f97316" }}>MASA</span>
+          </h1>
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "1.05rem",
+              color: "#4b5563",
+              maxWidth: "460px",
+              marginTop: "18px",
+              lineHeight: 1.75,
+            }}
+          >
+            Menelusuri perjalanan dan langkah SMK Negeri 26 Jakarta dalam
+            membangun pendidikan vokasi.
+          </p>
+        </ScrollReveal>
 
         <div
           style={{
@@ -394,23 +387,14 @@ const Sejarah = () => {
       <section
         id="timeline"
         ref={timelineRef}
-        style={{
-          backgroundColor: COLOR_BG,
-          width: "100%",
-          borderTopLeftRadius: "5rem",
-          borderTopRightRadius: "5rem",
-          paddingTop: "96px",
-          paddingBottom: "120px",
-          boxSizing: "border-box",
-          overflowX: "auto",
-        }}
+        className="bg-[#001f3f] w-full rounded-t-[2.5rem] sm:rounded-t-[4rem] lg:rounded-t-[5rem] pt-14 sm:pt-20 lg:pt-24 pb-16 sm:pb-24 lg:pb-32 px-4 sm:px-6 lg:px-0 overflow-hidden box-border"
       >
-        <div style={{ textAlign: "center", marginBottom: "80px" }}>
+        <div className="text-center mb-10 sm:mb-16 lg:mb-20 px-4">
           <h1
             style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 900,
-              fontSize: "clamp(3rem, 9vw, 7rem)",
+              fontSize: "clamp(2.5rem, 8vw, 7rem)",
               color: "#ffffff",
               letterSpacing: "-0.02em",
               margin: 0,
@@ -420,12 +404,57 @@ const Sejarah = () => {
           </h1>
         </div>
 
+        {/* Mobile / Tablet Vertical Timeline */}
+        <div className="block lg:hidden w-full max-w-xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="relative pl-6 sm:pl-8 border-l-2 sm:border-l-4 border-[#38bdf8]/60 space-y-12 sm:space-y-16">
+            {timelineData.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: i * 0.08 }}
+                className="relative"
+              >
+                {/* Dot indicator on vertical line */}
+                <div className="absolute -left-[31px] sm:-left-[42px] top-1.5 size-4 sm:size-5 rounded-full bg-white border-4 border-[#38bdf8] shadow-[0_0_12px_rgba(56,189,248,0.8)]" />
+
+                {/* Year badge */}
+                <span className="inline-block font-montserrat font-black text-2xl sm:text-3xl text-[#FF5733] tracking-wide">
+                  {item.year}
+                </span>
+
+                {/* Title */}
+                <h3 className="font-montserrat font-bold text-lg sm:text-xl text-[#007AFF] mt-1 mb-2 leading-snug">
+                  {item.title}
+                </h3>
+
+                {/* Description */}
+                <p className="font-poppins text-sm sm:text-base text-slate-200 leading-relaxed mb-4">
+                  {item.description}
+                </p>
+
+                {/* Image */}
+                <div className="w-full max-w-md rounded-2xl overflow-hidden shadow-lg border border-white/10 bg-slate-800">
+                  <a href={item.image} target="_blank" rel="noopener noreferrer">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-48 sm:h-64 object-cover cursor-zoom-in transition-transform duration-300 hover:scale-105"
+                    />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Snake Timeline (Original Design preserved) */}
         <div
+          className="hidden lg:block relative mx-auto"
           style={{
-            position: "relative",
             width: CONTENT_WIDTH,
             maxWidth: "100%",
-            margin: "0 auto",
           }}
         >
           {/* SVG path — absolute, mengisi persis area items di bawahnya */}

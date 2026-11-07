@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { Handshake, FileText, Rocket, BarChart2, TrendingUp } from "lucide-react";
+import { ScrollReveal } from '../../components/ScrollReveal';
 
 // ─── Hook: auto-scroll dengan pause saat hover/touch ─────────
 function useAutoScroll(speed = 1) {
@@ -93,11 +94,11 @@ const AlurKerjaSama = () => {
     <section className="w-full bg-side-back py-20 font-sans">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header Section */}
-        <div className="text-center mb-20">
-          <h1 className="text-5xl font-bold text-black mb-4">
+        <div className="text-center mb-10 sm:mb-16 lg:mb-20">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-3 sm:mb-4">
             Alur <span className="text-[#FE5631]">Kerja Sama</span>
           </h1>
-          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-500 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-2">
             Prosedur kemitraan yang transparan dan terstruktur untuk memastikan
             keberhasilan kolaborasi jangka panjang.
           </p>
@@ -105,9 +106,8 @@ const AlurKerjaSama = () => {
 
         {/* Timeline Section */}
         <div className="relative w-full">
-          {/* Garis Horizontal Background */}
-          {/* top-10 menyesuaikan agar persis di tengah lingkaran (h-20 = 80px, tengah = 40px/top-10) */}
-          <div className="absolute top-10 left-0 w-full h-0.5 bg-gray-300 z-0"></div>
+          {/* Garis Horizontal Background (Desktop only) */}
+          <div className="hidden md:block absolute top-10 left-0 w-full h-0.5 bg-gray-300 z-0"></div>
 
           {/* Grid Container untuk Item */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 relative z-10">
@@ -198,8 +198,6 @@ export function MitraScroll({ mitraIndustri = [] }) {
 const HubunganIndustri = () => {
   const heroSectionRef = useRef(null);
   const contentRef = useRef(null);
-  const numberRef = useRef(null);
-  const curveRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -212,34 +210,6 @@ const HubunganIndustri = () => {
             opacity: 1,
             duration: 0.7,
             stagger: 0.08,
-            ease: 'power2.out',
-          }
-        );
-      }
-
-      if (numberRef.current) {
-        gsap.fromTo(
-          numberRef.current,
-          { opacity: 0, scale: 0.96 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            delay: 0.1,
-            ease: 'power2.out',
-          }
-        );
-      }
-
-      if (curveRef.current) {
-        gsap.fromTo(
-          curveRef.current,
-          { opacity: 0, x: 30 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            delay: 0.05,
             ease: 'power2.out',
           }
         );
@@ -279,10 +249,6 @@ const HubunganIndustri = () => {
           }}
         />
 
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-16 -top-40 z-0 h-[470px] w-[430px] rounded-bl-[170px] bg-[#d9d9d9] sm:-right-24 sm:-top-52 lg:h-[560px] lg:w-[510px]"
-        />
 
         <div className="relative z-10 mx-auto w-full max-w-7xl">
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-4">
@@ -317,35 +283,32 @@ const HubunganIndustri = () => {
               </button>
             </div>
 
-            <div className="pointer-events-none relative hidden h-64 select-none items-center justify-center lg:col-span-5 lg:flex">
-              <span
-                aria-hidden="true"
-                className="font-montserrat text-[210px] font-extrabold leading-none text-transparent"
-                style={{ WebkitTextStroke: '1px #74a9ff' }}
-              >
-                26
-              </span>
-            </div>
+
           </div>
         </div>
       </section>
 
-      <section id="mitra-industri" className='bg-white py-16 min-h-screen'>
+      <section id="mitra-industri" className='bg-white py-14 sm:py-20'>
         <div className="container mx-auto px-4">
-          <h2 className='text-5xl font-bold text-center text-black'>Mitra <span className='text-secondary'>Industri</span></h2>
-          <p className='text-lg mx-auto w-3/5 text-center text-gray-600 px-12 mt-4'>
-            Kami bekerja sama dengan berbagai pemimpin industri global dan nasional untuk
-            memastikan kurikulum yang relevan dan peluang karir terbaik bagi lulusan kami.          </p>
+          <ScrollReveal direction="up" duration={0.5}>
+            <h2 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-black'>Mitra <span className='text-secondary'>Industri</span></h2>
+            <p className='text-sm sm:text-base lg:text-lg mx-auto max-w-2xl w-full text-center text-gray-600 px-4 sm:px-6 mt-3 sm:mt-4'>
+              Kami bekerja sama dengan berbagai pemimpin industri global dan nasional untuk
+              memastikan kurikulum yang relevan dan peluang karir terbaik bagi lulusan kami.
+            </p>
+          </ScrollReveal>
         </div>
-        <MitraScroll mitraIndustri={mitraIndustri} />
-
+        <ScrollReveal direction="up" delay={0.1} duration={0.55}>
+          <MitraScroll mitraIndustri={mitraIndustri} />
+        </ScrollReveal>
       </section>
-      <section className='bg-side-back py-8 min-h-screen'>
-        <div className="container mx-auto px-4">
-          {/* <h2 className='text-5xl font-bold text-center text-black'>Alur <span className='text-secondary'>Kerja Sama</span></h2> */}
-          <AlurKerjaSama />
-        </div>
 
+      <section className='bg-side-back py-4 sm:py-8'>
+        <div className="container mx-auto px-4">
+          <ScrollReveal direction="up" duration={0.55}>
+            <AlurKerjaSama />
+          </ScrollReveal>
+        </div>
       </section>
     </>
   )

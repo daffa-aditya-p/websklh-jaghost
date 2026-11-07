@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import DepthCarousel from '../../components/DepthCarousel'
 import { ArrowLeft, ArrowRight, Download } from 'lucide-react'
+import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from '../../components/ScrollReveal'
 import juniorTechnicalSupport from '../../assets/skemaUjiKom/skema_sertifikasi_okupasi_junior_technical_support-A7lHgBLSzv0AOMZy.pdf'
 import tukangBangunanGedung from '../../assets/skemaUjiKom/skema_sertifikasi_okupasi_tukang_bangunan_gedung-1kugtkpl7KIvmcJN.pdf'
 import operatorMesinBubut from '../../assets/skemaUjiKom/skema_sertifikasi_okupasi_operator_mesin_bubut-o1To4U4xKbBZycHm.pdf'
@@ -60,7 +61,7 @@ const LSP = () => {
         <div className="w-full" />
 
         {/* Main Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 w-full my-auto">
+        <ScrollReveal direction="up" duration={0.6} className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 w-full my-auto">
           {/* Badge */}
           <div className="mb-5 sm:mb-6">
             <span className="inline-block bg-tertiary text-white px-8 sm:px-9 py-1 sm:py-1.25 rounded-t-full rounded-br-full text-md sm:text-base md:text-xl font-medium tracking-wide shadow-sm">
@@ -75,16 +76,16 @@ const LSP = () => {
           </h1>
 
           {/* Subtitle */}
-          <p className="font-poppins pr-100 text-sm sm:text-md md:text-lg lg:text-xl text-slate-600 tracking-wide">
-            Lembaga Sertifikasi Profesi SMK Negeri 26 Jakarta <br /> mendukung pengakuan kompetensi siswa sesuai bidang <br /> keahliannya.
+          <p className="font-poppins pr-0 sm:pr-12 lg:pr-100 text-sm sm:text-base md:text-lg lg:text-xl text-slate-600 tracking-wide">
+            Lembaga Sertifikasi Profesi SMK Negeri 26 Jakarta mendukung pengakuan kompetensi siswa sesuai bidang keahliannya.
           </p>
-          <button className="group inline-flex cursor-pointer items-center justify-center gap-2 rounded-full mt-2 bg-[#0075FF] px-7 py-3 text-[15px] font-medium text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:bg-[#0062db] hover:shadow-blue-500/40 active:scale-[0.98]">
+          <button className="group inline-flex cursor-pointer items-center justify-center gap-2 rounded-full mt-4 bg-[#0075FF] px-7 py-3 text-[15px] font-medium text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:bg-[#0062db] hover:shadow-blue-500/40 active:scale-[0.98]">
             <span>Lihat Skema Sertifikasi</span>
             <span className="text-base font-bold transition-transform duration-300 group-hover:translate-x-1">
               &gt;
             </span>
           </button>
-        </div>
+        </ScrollReveal>
 
         {/* Bottom Scroll Indicator */}
         <div className="relative z-10 flex justify-center items-center pt-6">
@@ -92,54 +93,57 @@ const LSP = () => {
         </div>
       </section>
 
-      <section className="container flex flex-row justify-between items-center bg-white min-h-screen w-full px-18">
-        <div className="w-1/2 flex flex-col">
+      <section className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center bg-white min-h-[auto] lg:min-h-screen w-full px-6 sm:px-10 lg:px-18 py-14 lg:py-20 gap-10 lg:gap-0">
+        <ScrollReveal direction="up" duration={0.55} className="w-full lg:w-1/2 flex flex-col text-center lg:text-left">
           <div className="">
-            <h1 className="text-5xl font-black ">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black">
               <span className="text-primary">Lembaga</span>
-              <br />
+              <br className="hidden sm:inline" />{" "}
               <span className="text-secondary">Sertifikasi</span>
-              <br />
+              <br className="hidden sm:inline" />{" "}
               <span className="text-tertiary">Profesi — P1</span>
             </h1>
           </div>
-          <div className="text-xl text-slate-600 mt-5">
+          <div className="text-base sm:text-lg lg:text-xl text-slate-600 mt-4 sm:mt-5 max-w-xl mx-auto lg:mx-0">
             <p>SMK Negeri 26 Jakarta memiliki Lembaga Sertifikasi Profesi yang menjadi bagian dari proses sertifikasi kompetensi sesuai bidang keahlian.</p>
           </div>
-        </div>
-        <div className="pl-16 w-1/2">
-          <DepthCarousel />
-        </div>
+        </ScrollReveal>
+        <ScrollReveal direction="up" delay={0.1} duration={0.6} className="w-full lg:w-1/2 pl-0 lg:pl-16 flex justify-center overflow-hidden h-[340px] sm:h-[420px] lg:h-[550px]">
+          <DepthCarousel cardWidth={520} cardHeight={400} />
+        </ScrollReveal>
       </section>
 
-      <section className='container flex flex-row bg-accent justify-center gap-28 items-start px-24 py-12 text-primary'>
-        <div className="w-2/5 flex flex-col border-l-2 border-primary p-4">
-          <h1 className='uppercase font-bold text-4xl' >Visi</h1>
-          <p className='text-slate-600'>Menjadi lembaga sertifikasi profesi yang terpercaya dan professional untuk memastikan kompetensi peserta didik yang diakui dunia kerja di tingkat nasional maupun internasional</p>
-        </div>
-        <div className="w-2/5 flex flex-col border-l-2 border-primary p-4">
-          <h1 className='uppercase font-bold text-4xl'>Misi</h1>
-          <ul>
+      <section className='w-full bg-accent flex flex-col md:flex-row justify-center gap-8 md:gap-14 lg:gap-28 items-start px-6 sm:px-12 lg:px-24 py-12 lg:py-16 text-primary'>
+        <ScrollReveal direction="up" duration={0.5} className="w-full md:w-1/2 lg:w-2/5 flex flex-col border-l-4 sm:border-l-2 border-primary p-4 sm:p-5 bg-white/40 md:bg-transparent rounded-r-xl md:rounded-none">
+          <h1 className='uppercase font-bold text-2xl sm:text-3xl lg:text-4xl' >Visi</h1>
+          <p className='text-slate-600 mt-2 text-sm sm:text-base'>Menjadi lembaga sertifikasi profesi yang terpercaya dan professional untuk memastikan kompetensi peserta didik yang diakui dunia kerja di tingkat nasional maupun internasional</p>
+        </ScrollReveal>
+        <ScrollReveal direction="up" delay={0.08} duration={0.5} className="w-full md:w-1/2 lg:w-2/5 flex flex-col border-l-4 sm:border-l-2 border-primary p-4 sm:p-5 bg-white/40 md:bg-transparent rounded-r-xl md:rounded-none">
+          <h1 className='uppercase font-bold text-2xl sm:text-3xl lg:text-4xl'>Misi</h1>
+          <ul className="mt-2 space-y-1">
             {misi.map((item, index) => (
-              <li key={index} className='text-slate-600 list-decimal ml-5'>{item}</li>
+              <li key={index} className='text-slate-600 list-decimal ml-5 text-sm sm:text-base'>{item}</li>
             ))}
           </ul>
-        </div>
+        </ScrollReveal>
       </section>
 
-      <section className="w-full bg-[#032544] px-10 py-20 text-white sm:px-12 sm:py-14 lg:px-20 lg:py-16">
-        <div className="mx-auto max-w-6xl px-8">
-          <h2 className="font-montserrat text-xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
-            SKEMA SERTIFIKASI
-          </h2>
-          <p className="mt-2 font-poppins text-[10px] text-white/85 sm:text-xs lg:text-sm">
-            Daftar skema kompetensi yang diujikan di LSP-P1 SMK Negeri 26 Jakarta.
-          </p>
+      <section className="w-full bg-[#032544] px-4 sm:px-10 lg:px-20 py-12 sm:py-14 lg:py-16 text-white">
+        <div className="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
+          <ScrollReveal direction="up" duration={0.5}>
+            <h2 className="font-montserrat text-xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
+              SKEMA SERTIFIKASI
+            </h2>
+            <p className="mt-2 font-poppins text-xs sm:text-xs lg:text-sm text-white/85">
+              Daftar skema kompetensi yang diujikan di LSP-P1 SMK Negeri 26 Jakarta.
+            </p>
+          </ScrollReveal>
 
-          <div className="mt-7 border-t border-white/20 px-8 ">
+          <ScrollStagger className="mt-7 border-t border-white/20 px-0 sm:px-4 lg:px-8" staggerDelay={0.04}>
             {skemaSertifikasi.map((skema, index) => (
-              <a
+              <ScrollStaggerItem
                 key={skema[0]}
+                as="a"
                 href={skema[1]}
                 download
                 title={`Klik untuk mengunduh ${skema[0]}`}
@@ -155,9 +159,9 @@ const LSP = () => {
                 <span className="flex duration-300 group-hover:scale-105 size-4 items-center justify-center rounded-full bg-transparent group-hover:bg-white group-hover:text-primary transition-all ease-in-out text-white sm:size-4.5">
                   <Download size={12} strokeWidth={3} aria-hidden="true" />
                 </span>
-              </a>
+              </ScrollStaggerItem>
             ))}
-          </div>
+          </ScrollStagger>
         </div>
       </section>
 
